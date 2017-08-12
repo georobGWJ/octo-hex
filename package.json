@@ -1,0 +1,25 @@
+{
+  "name": "octo-hex",
+  "version": "0.0.1",
+  "description": "An Electron based hex editor.",
+  "main": "./app/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georobGWJ/octo-hex.git"
+  },
+  "author": "Robert Turner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/georobGWJ/octo-hex/issues"
+  },
+  "homepage": "https://github.com/georobGWJ/octo-hex#readme",
+  "devDependencies": {
+    "electron": "^1.7.5"
+  }
+}
