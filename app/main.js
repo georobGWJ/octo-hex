@@ -1,10 +1,12 @@
-const {app, BrowserWindow} = require('electron');
+const { app, BrowserWindow } = require('electron');
 
 let mainWindow = null;
 
 app.on('ready', () => {
   console.log('Electron is ready...');
-  mainWindow = new BrowserWindow();     // Create the window
-  mainWindow.webContents.loadURL(`file://${__dirname}/index.html`);   // Populate the window
-  
+  mainWindow.loadURL(`file://${__dirname}/index.html`);   // Create and populate the window
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 });
