@@ -8,24 +8,26 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({ show: false });
   mainWindow.loadURL(`file://${__dirname}/index.html`);   // Create and populate the window
 
-  const getFileFromUser = exports.getFileFromUser = () => {
-    const files = dialog.showOpenDialog(mainWindow, {     // Trigger file open dialog
-      properties: ['openFile']                            // configuration object
-    });
-    if (!files) { return; }                               // return if no files
-
-    const file = files[0];                                // pull the first file from the array
-    const content = fs.readFileSync(file).toString();
-
-    console.log(content);                                 // Log files to console
-  }
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
     getFileFromUser();
   });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 });
+
+const openFile = (file) => {
+  const raw = fs.readFileSync(file);
+  mainWindow.webContents.send('file-opened', file, raw);
+  console.log(raw);                                 // Log files to console
+};
+
+const getFileFromUser = exports.getFileFromUser = () => {
+  const files = dialog.showOpenDialog(mainWindow, {     // Trigger file open dialog
+    properties: ['openFile']                            // configuration object
+  });
+  if (files) { openFile(files[0]); }                    // return if no files
+};
