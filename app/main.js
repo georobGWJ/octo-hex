@@ -8,8 +8,8 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({ show: false });
   mainWindow.loadURL(`file://${__dirname}/index.html`);   // Create and populate the window
 
-  const getFileFromUser = () => {
-    const files = dialog.showOpenDialog({                 // Trigger file open dialog
+  const getFileFromUser = exports.getFileFromUser = () => {
+    const files = dialog.showOpenDialog(mainWindow, {     // Trigger file open dialog
       properties: ['openFile']                            // configuration object
     });
     if (!files) { return; }                               // return if no files

@@ -9,3 +9,7 @@ const newFileButton = document.querySelector('#new-file');
 const openFileButton = document.querySelector('#open-file');
 const saveFileButton = document.querySelector('#save-file');
 const closeFileButton = document.querySelector('#close-file');
+
+openFileButton.addEventListener('click', () => {
+  mainProcess.getFileFromUser();
+});
