@@ -1,4 +1,5 @@
 const { app, BrowserWindow, dialog } = require('electron');
+const fs = require('fs');
 
 let mainWindow = null;
 
@@ -13,9 +14,11 @@ app.on('ready', () => {
     });
     if (!files) { return; }                               // return if no files
 
-    console.log(files);                                   // Log files to console
-  }
+    const file = files[0];                                // pull the first file from the array
+    const content = fs.readFileSync(file).toString();
 
+    console.log(content);                                 // Log files to console
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null;
