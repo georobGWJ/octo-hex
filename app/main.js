@@ -19,15 +19,15 @@ app.on('ready', () => {
   });
 });
 
-const openFile = (file) => {
-  const raw = fs.readFileSync(file);
-  mainWindow.webContents.send('file-opened', file, raw);
-  console.log(raw);                                 // Log files to console
-};
-
 const getFileFromUser = exports.getFileFromUser = () => {
   const files = dialog.showOpenDialog(mainWindow, {     // Trigger file open dialog
     properties: ['openFile']                            // configuration object
   });
-  if (files) { openFile(files[0]); }                    // return if no files
+  if (files) { openFile(files[0]) };                    // return if no files
+};
+
+const openFile = (file) => {
+  const raw = fs.readFileSync(file);
+  mainWindow.webContents.send('file-opened', file, raw);
+  console.log(raw);                                 // Log files to console
 };

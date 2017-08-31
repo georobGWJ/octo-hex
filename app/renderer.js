@@ -15,6 +15,7 @@ openFileButton.addEventListener('click', () => {
 });
 
 ipcRenderer.on('file-opened', (event, file, raw) => {
-  rawView.value = raw;
+  rawView.value = raw.toString('hex');
   renderedView.value = raw.toString();
+  console.log('ipcRenderer rendering!!!');
 });
