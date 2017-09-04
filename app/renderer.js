@@ -16,6 +16,14 @@ openFileButton.addEventListener('click', () => {
 
 // TODO: Add listener to get cursor location in raw textbox and
 // set cursor location in rendered textbox to same
+renderedView.addEventListener('keyup', () => {
+  var cursorPosition = renderedView.prop("selectionStart");
+  //var x = renderedView.cols;
+  //var y = renderedView.rows;
+  //console.log(x + ", " + y + "\n");
+  console.log(cursorPosition + "\n");
+})
+
 
 // TODO: Add listener to get cursor location in rendered textbox and
 // set cursor location in raw textbox to same
