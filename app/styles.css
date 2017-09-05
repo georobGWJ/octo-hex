@@ -29,7 +29,8 @@ body {
   padding: 10px 10px 10px 10px;
 }
 
-div, button {
+
+textarea, input, div, button {
   /* Remove browser default highlighting around active input fields */
   outline: none;
   margin: 0;
@@ -38,6 +39,8 @@ div, button {
 button {
   font-size:14px;
   background-color: rgb(181, 220, 216);
+  border: none;
+  padding: 0.5em 1em;
 }
 
 button:hover {
@@ -52,23 +55,17 @@ button:disabled {
   background-color: rgb(196, 204, 202);
 }
 
-.container {
+.main-canvas {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 100vh;
   min-width: 100vw;
   position: relative;
 }
 
-.main-canvas {
-  height:100vh;
-  /* Use Flexbox to align panes of application */
-  display:flex;
-}
-
-.raw, .rendered {
+.raw, .rendered, .side-controls {
   min-height: 100%;
-  max-width: 40%;
+  max-width: 35%;
   /* Set both panes to an equal width using Flexbox */
   flex-grow: 1;
   padding: 1em;
@@ -76,13 +73,17 @@ button:disabled {
   font-size: 16px;
 }
 
-.raw-content {
+#raw-content {
+  min-height: 100%;
+  box-sizing:border-box;
   border: 5px solid rgb(238, 252, 250);
   background-color: rgb(238, 252, 250);
   font-family: "Source Code Pro", Courier;
 }
 
-.rendered-content {
+#rendered-content {
+  min-height: 100%;
+  box-sizing:border-box;
   border: 5px solid rgb(238, 252, 250);
   font-family: "Source Code Pro", Courier;
 }
