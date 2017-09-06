@@ -37,6 +37,12 @@ function binToString(binData) {
     if (binData[i] == 0)
       // Append a space if char is null
       prettyString += ' '
+    else if (binData[i] == 10)
+      // Special char for newlines '\n'
+      prettyString += String.fromCharCode(parseInt(172));
+    else if (binData[i] == 9)
+      // Special char for horizontal tabs '\t'
+      prettyString += String.fromCharCode(parseInt(187));
     else
       // Append the actual character
       prettyString += String.fromCharCode(parseInt(binData[i]));
