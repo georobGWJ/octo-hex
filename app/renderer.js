@@ -31,6 +31,19 @@ renderedView.addEventListener('keyup', () => {
 // TODO: Add listener to get cursor location in rendered textbox and
 // set cursor location in raw textbox to same
 
+function binToString(binData) {
+  var prettyString = '';
+  for (var i = 0; i < binData.length; i++) {
+    if (binData[i] == 0)
+      // Append a space if char is null
+      prettyString += ' '
+    else
+      // Append the actual character
+      prettyString += String.fromCharCode(parseInt(binData[i]));
+  }
+  return prettyString;
+}
+
 // TODO: Add formatting function to print 'hex' version of
 // raw content as arbitrary width (4, 8, 16, etc.)
 // ex. 2f00 2b23 743c 7a6b
@@ -50,6 +63,6 @@ renderedView.addEventListener('keyup', () => {
 
 ipcRenderer.on('file-opened', (event, file, raw) => {
   rawView.value = raw.toString('hex');
-  renderedView.value = raw.toString();
-  console.log('ipcRenderer rendering!!!');
+  renderedView.value = binToString(raw);
+  // console.log('ipcRenderer rendering!!!');
 });
