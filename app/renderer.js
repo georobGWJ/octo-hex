@@ -27,6 +27,9 @@ renderedView.addEventListener('keyup', () => {
   console.log(cursorPosition + "\n");
 })
 
+// Aila (Ayla?) bartender at lost n found
+// Gabby - 3d printed candy sudo room
+// Jenny, Rob - Sudo room delegates
 
 // TODO: Add listener to get cursor location in rendered textbox and
 // set cursor location in raw textbox to same
@@ -58,7 +61,7 @@ function binToString(binData) {
 // what the value would be if it's chars, if its an int,
 // if it's a float, if it's a double, etc.
 
-// TODO: Make the raw textarea uneditable
+// TODO: Make the raw textarea uneditable but hightlight current hex value
 
 // TODO: Write a function that updates the raw textarea if
 // the rendered area is updated.
