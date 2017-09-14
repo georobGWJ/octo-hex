@@ -19,9 +19,13 @@ openFileButton.addEventListener('click', () => {
 renderedView.addEventListener('keyup', () => {
   // console.log("key-up!");
   // var cursorPosition = renderedView.prop("selectionStart");
+  // TODO: Create working buffer that is separate from the raw buffer.
+  // TODO: Add logic to the working buffer to update it based on
+  //       updates of the rendered content.
   var cursorPosition = renderedView.selectionStart;
   rawView.selectionStart = cursorPosition;
-  //var x = renderedView.cols;
+  rawView.value = update_raw_textarea(raw);  // this won't currently work
+  // raw (if it's in scope) hasn't been changed if the 'rendered' has.
   //var y = renderedView.rows;
   //console.log(x + ", " + y + "\n");
   console.log(cursorPosition + "\n");
