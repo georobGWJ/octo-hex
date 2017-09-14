@@ -53,10 +53,30 @@ function binToString(binData) {
   return prettyString;
 }
 
-// TODO: Add formatting function to print 'hex' version of
+// DONE: Add formatting function to print 'hex' version of
 // raw content as arbitrary width (4, 8, 16, etc.)
 // ex. 2f00 2b23 743c 7a6b
-
+function update_raw_textarea(raw_data) {
+  // TODO: Refactor this to make it more elegant
+  var result = '';
+  var j = 1;
+  for (var i = 0; i < raw_data.length; i++) {
+    if (j % 5 == 0) {
+      result += '  ';
+      i--;
+    } else if (raw_data[i].toString(16) == 0) {
+      result += '00 ';
+    } else {
+      if (raw_data[i].toString(16).length == 1) {
+        result +=' ';
+      }
+      result += raw_data[i].toString(16);
+      result += ' ';
+    }
+    j++;
+  }
+  return result;
+}
 // TODO: Add 'translator' boxes in control panel that show
 // what the value would be if it's chars, if its an int,
 // if it's a float, if it's a double, etc.
@@ -71,7 +91,7 @@ function binToString(binData) {
 // integrity of the original file.
 
 ipcRenderer.on('file-opened', (event, file, raw) => {
-  rawView.value = raw.toString('hex');
+  rawView.value = update_raw_textarea(raw); // raw.toString('hex');
   renderedView.value = binToString(raw);
   // console.log('ipcRenderer rendering!!!');
 });
