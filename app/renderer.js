@@ -9,6 +9,13 @@ const newFileButton = document.querySelector('#new-file');
 const openFileButton = document.querySelector('#open-file');
 const saveFileButton = document.querySelector('#save-file');
 const closeFileButton = document.querySelector('#close-file');
+const charDisplay = document.querySelector('#form_char');
+const intDisplay = document.querySelector('#form_int');
+const floatDisplay = document.querySelector('#form_float');
+const doubleDisplay = document.querySelector('#form_double');
+
+// Globals
+var globalRaw;
 
 openFileButton.addEventListener('click', () => {
   mainProcess.getFileFromUser();
@@ -24,14 +31,16 @@ renderedView.addEventListener('keyup', () => {
   //       updates of the rendered content.
   var cursorPosition = renderedView.selectionStart;
   rawView.selectionStart = cursorPosition;
-  rawView.value = update_raw_textarea(raw);  // this won't currently work
-  // raw (if it's in scope) hasn't been changed if the 'rendered' has.
-  //var y = renderedView.rows;
-  //console.log(x + ", " + y + "\n");
-  console.log(cursorPosition + "\n");
+  // rawView.value = update_raw_textarea();  // this won't currently work
+  charDisplay.value = String.fromCharCode(globalRaw[cursorPosition]);
+  // TODO: Consider adding Big Endian support
+  intDisplay.value = globalRaw.readIntLE(cursorPosition, 4);
+  floatDisplay.value = globalRaw.readFloatLE(cursorPosition);
+  doubleDisplay.value = globalRaw.readDoubleLE(cursorPosition);
+  // console.log(cursorPosition + "\n");
 })
 
-// Aila (Ayla?) bartender at lost n found
+// Ayla - bartender at lost and found
 // Gabby - 3d printed candy sudo room
 // Jenny, Rob - Sudo room delegates
 
@@ -43,7 +52,7 @@ function binToString(binData) {
   for (var i = 0; i < binData.length; i++) {
     if (binData[i] == 0)
       // Append a space if char is null
-      prettyString += ' '
+      prettyString += ' ';
     else if (binData[i] == 10)
       // Special char for newlines '\n'
       prettyString += String.fromCharCode(parseInt(172));
@@ -81,9 +90,7 @@ function update_raw_textarea(raw_data) {
   }
   return result;
 }
-// TODO: Add 'translator' boxes in control panel that show
-// what the value would be if it's chars, if its an int,
-// if it's a float, if it's a double, etc.
+
 
 // TODO: Make the raw textarea uneditable but hightlight current hex value
 
@@ -95,6 +102,7 @@ function update_raw_textarea(raw_data) {
 // integrity of the original file.
 
 ipcRenderer.on('file-opened', (event, file, raw) => {
+  globalRaw = raw;
   rawView.value = update_raw_textarea(raw); // raw.toString('hex');
   renderedView.value = binToString(raw);
   // console.log('ipcRenderer rendering!!!');
